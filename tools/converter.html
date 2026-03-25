@@ -21,11 +21,54 @@
 
 <header>
   <h1>أدوات التحويل</h1>
-  <p>قم بتحويل العملات والوحدات بسهولة وبسرعة.</p>
+  <p>قم بتحويل العملات والوحدات بسهولة وسرعة.</p>
 </header>
 
 <div class="container">
-  <p>هنا يمكن وضع أدوات تحويل العملات والوحدات المختلفة.</p>
+
+<h2>أداة تحويل العملات</h2>
+<form id="converter-form">
+  <label>المبلغ:</label>
+  <input type="number" id="convert-amount" placeholder="أدخل المبلغ" required>
+
+  <label>اختر العملة الأصلية:</label>
+  <select id="convert-from">
+    <option value="USD">دولار أمريكي</option>
+    <option value="EUR">يورو</option>
+    <option value="EGP">جنيه مصري</option>
+  </select>
+
+  <label>اختر العملة المراد التحويل إليها:</label>
+  <select id="convert-to">
+    <option value="USD">دولار أمريكي</option>
+    <option value="EUR">يورو</option>
+    <option value="EGP">جنيه مصري</option>
+  </select>
+
+  <button type="button" class="btn" onclick="convertCurrency()">تحويل</button>
+</form>
+
+<p id="convert-result"></p>
+
+<script>
+function convertCurrency() {
+  const amount = parseFloat(document.getElementById('convert-amount').value);
+  const from = document.getElementById('convert-from').value;
+  const to = document.getElementById('convert-to').value;
+
+  // أسعار تقريبية للتحويل
+  const rates = {
+    "USD": 1,
+    "EUR": 0.93,
+    "EGP": 31
+  };
+
+  const result = amount * (rates[to]/rates[from]);
+  document.getElementById('convert-result').innerText =
+    `المبلغ المحول: ${result.toFixed(2)} ${to}`;
+}
+</script>
+
 </div>
 
 <footer>
