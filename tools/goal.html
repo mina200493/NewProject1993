@@ -25,7 +25,39 @@
 </header>
 
 <div class="container">
-  <p>هنا يمكن وضع نموذج لحساب مقدار الادخار المطلوب للوصول لهدفك المالي.</p>
+
+<h2>حاسبة هدف الادخار</h2>
+<form id="goal-form">
+  <label>المبلغ النهائي المطلوب ($):</label>
+  <input type="number" id="goal-amount" placeholder="أدخل المبلغ النهائي" required>
+
+  <label>معدل الفائدة السنوي (%):</label>
+  <input type="number" id="goal-rate" placeholder="أدخل معدل الفائدة" required>
+
+  <label>عدد السنوات:</label>
+  <input type="number" id="goal-years" placeholder="عدد السنوات" required>
+
+  <label>عدد الدفعات سنويًا:</label>
+  <input type="number" id="goal-times" placeholder="مثلاً 12 للشهري" required>
+
+  <button type="button" class="btn" onclick="calculateGoal()">احسب</button>
+</form>
+
+<p id="goal-result"></p>
+
+<script>
+function calculateGoal() {
+  const FV = parseFloat(document.getElementById('goal-amount').value);
+  const r = parseFloat(document.getElementById('goal-rate').value)/100;
+  const t = parseFloat(document.getElementById('goal-years').value);
+  const n = parseFloat(document.getElementById('goal-times').value);
+
+  const P = FV * (r/n) / (Math.pow(1 + r/n, n*t) - 1);
+  document.getElementById('goal-result').innerText =
+    `المبلغ الذي يجب ادخاره في كل دفعة: $${P.toFixed(2)}`;
+}
+</script>
+
 </div>
 
 <footer>
