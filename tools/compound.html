@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>حاسبة الفائدة المركبة</title>
 <link rel="stylesheet" href="../style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -25,8 +27,39 @@
 </header>
 
 <div class="container">
-  <!-- هنا يمكن وضع الفورم أو الآلة الحاسبة -->
-  <p>هنا سيتم وضع نموذج الحساب.</p>
+
+<h2>حاسبة الفائدة المركبة</h2>
+<form id="compound-form">
+  <label>المبلغ الأساسي ($):</label>
+  <input type="number" id="principal" placeholder="أدخل المبلغ الأساسي" required>
+
+  <label>معدل الفائدة السنوي (%):</label>
+  <input type="number" id="rate" placeholder="أدخل معدل الفائدة" required>
+
+  <label>عدد السنوات:</label>
+  <input type="number" id="years" placeholder="عدد السنوات" required>
+
+  <label>عدد مرات التركيب سنويًا:</label>
+  <input type="number" id="times" placeholder="مثلاً 12 للشهري" required>
+
+  <button type="button" class="btn" onclick="calculateCompound()">احسب</button>
+</form>
+
+<p id="compound-result"></p>
+
+<script>
+function calculateCompound() {
+  const P = parseFloat(document.getElementById('principal').value);
+  const r = parseFloat(document.getElementById('rate').value)/100;
+  const t = parseFloat(document.getElementById('years').value);
+  const n = parseFloat(document.getElementById('times').value);
+  
+  const A = P * Math.pow((1 + r/n), n*t);
+  document.getElementById('compound-result').innerText = 
+    `القيمة المستقبلية: $${A.toFixed(2)}`;
+}
+</script>
+
 </div>
 
 <footer>
